@@ -318,6 +318,13 @@ impl Polygon {
             Err(Error::TooManyPathsError)
         }
     }
+    pub fn centroid(&self) -> Option<Point> {
+        self.count.centroid()
+    }
+    pub fn area(&self) -> f64 {
+        self.count.area()
+    }
+
     fn position_at_level(
         &self, point: &Point,
         level: &Vec<usize>,
