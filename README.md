@@ -56,6 +56,7 @@ Again the result of the operation here is Result<Solution, Error>. Client code m
 let bounds = polygon.bounds().unwrap();
 let area = polygon.area();
 let centroid = polygon.centroid();
+let position = polygon.position(&point, Mode::Closed);
 ```
 
 
