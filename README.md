@@ -59,7 +59,7 @@ let centroid = polygon.centroid();
 let position = polygon.position(&point);
 ```
 
-For these methods to be visible, Shape trait must be in scope.
+For `bounds` and `position` to be visible, Shape trait must be in scope.
  
 #### License
 This project is licensed under the terms of the MIT license.
