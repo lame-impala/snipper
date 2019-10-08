@@ -59,5 +59,6 @@ let centroid = polygon.centroid();
 let position = polygon.position(&point, Mode::Closed);
 ```
 
-
+#### Usage
+This project is licensed under the terms of the MIT license.
 
