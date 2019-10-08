@@ -6,7 +6,7 @@ Snipper performs common boolean operations with polygons: union, intersection, x
 Compared to a similar Rust library [rust-geo-booleanop](https://github.com/21re/rust-geo-booleanop), this one comes out slow. In benchmarks intersecting from 10 up to 10000 edges, Snipper proved increasingly slower by a factor of 4 to 10. This means asymptotic complexity of the implementation is not quite right. Most probably this is to a great extent due to the fact that BTreeMap is used internally to implement scope. As scope is recreated at each stop, this adds some complexity over the inherent complexity of Bentley-Ottmann algorithm. Some future version may address this problem.
 
 #### Purpose
-The library evolved from what originally was an educational project and its performance at the current stage is not on par with existing professional libraries. Nevertheless I consider it to be even at this stage an interesting catalogue of Rust specific solutions and techniques that may be inspirational for some users.
+The library evolved from what was originally an educational project and its performance at the current stage is not on par with existing professional libraries. Nevertheless even at this stage of development it makes for an interesting catalogue of Rust specific solutions and techniques that may be inspirational for some users.
 
 #### Usage
 Coordinates are limited to range from -2<sup>24</sup> to 2<sup>24</sup>. This is why point constructor returns Result and needs to be unwrapped:
@@ -29,7 +29,7 @@ let path = builder.build();
 
 All paths are considered closed.
 
-Polygon is created either from a path or a vector of paths. A polygon created this way may not meet prerequisites of a normal polygon (no self-intersections). This fact will not prevent Snipper from handling it correctly, but some convenience methods may not work as expected. To remind the user of this, polygon constructors are marked as unsafe:
+Polygon is created either from a path or a vector of paths. A polygon created this way may not meet prerequisites for a normal polygon (no self-intersections). This fact will not prevent Snipper from handling it just fine, but some convenience methods may not work as expected. To remind the user of this, polygon constructors are marked as unsafe:
 
 ```
 let polygon = unsafe { Polygon::trivial(path) };
