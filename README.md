@@ -56,9 +56,11 @@ Again, the result of the operation is Result<Solution, Error>. Client code may j
 let bounds = polygon.bounds().unwrap();
 let area = polygon.area();
 let centroid = polygon.centroid();
-let position = polygon.position(&point, Mode::Closed);
+let position = polygon.position(&point);
 ```
 
+For these methods to be visible, Shape trait must be in scope.
+ 
 #### License
 This project is licensed under the terms of the MIT license.
 
