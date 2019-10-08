@@ -9,3 +9,5 @@ Cargo.lock
 .idea/workspace.xml
 .vscode/*
 perf.data.old
+perf.data
+RGeom.iml

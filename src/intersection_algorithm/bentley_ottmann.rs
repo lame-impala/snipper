@@ -161,9 +161,10 @@ pub trait BentleyOttmann {
     ) -> Result<(Stack, DirtyRecords), Error> {
         let above = self.in_scope_or_vertical_above(&float);
         if let Some(above) = above {
-            // The check for verticals but it is actually necessary
-            // given how positions are marked as dirty. Maybe this
-            // could be done in some more consistent way
+            // The check for verticals may seem superfluous
+            // but it is actually necessary  given how
+            // positions are marked as dirty. Certainly this
+            // should be done in some more consistent way
             let vertical_endpoint = self.vertical_endpoint_option(&above);
             if vertical_endpoint.is_some() && vertical_endpoint.as_ref().unwrap().float_y() > f64::from(float) {
                 let coo = Coordinate::from_float(f64::from(above)).unwrap();
