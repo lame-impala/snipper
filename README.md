@@ -29,7 +29,7 @@ let path = builder.build();
 
 All paths are considered closed.
 
-Polygon is created either from a path or a vector of paths. A polygon created this way may not meet prerequisites of a normal polygon (no self-intersections). This fact will not prevent Snipper to handle it correctly, but some convenience methods may not work as expected. To remind the user of this, polygon constructors are marked as unsafe:
+Polygon is created either from a path or a vector of paths. A polygon created this way may not meet prerequisites of a normal polygon (no self-intersections). This fact will not prevent Snipper from handling it correctly, but some convenience methods may not work as expected. To remind the user of this, polygon constructors are marked as unsafe:
 
 ```
 let polygon = unsafe { Polygon::trivial(path) };
