@@ -50,7 +50,7 @@ let solution = Snipper::xor(poly0, poly1).unwrap();
 let polygon = solution.polygon().unwrap();
 ```
 
-Again the result of the operation here is Result<Solution, Error>. Client code may just pull a vector of paths out of the solution or have a new polygon built, which comes with some time penalty (significant with very complex polygons) but makes it possible to use polygon convenience methods:
+Again the result of the operation here is Result<Solution, Error>. Client code may just pull a vector of paths out of the solution, or have a new polygon built, which comes with a time penalty (significant with very complex polygons) but makes it possible to use polygon convenience methods:
 
 ```
 let bounds = polygon.bounds().unwrap();
