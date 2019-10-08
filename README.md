@@ -1,9 +1,9 @@
-# snipper
+# Snipper
 ### A polygon clipping library in Rust
-Snipper performs common boolean operations with polygons: union, intersection, xor, difference. There are no assumptions about how the polygon should be formed: complex polygons with holes or self-intersection polygons will do. It differs from similar libraries in that it only uses integer coordinates in the API as well as internally. Algorithm used here is the classic Bentley-Ottmann modified to work with integer coordinates. 
+Snipper performs common boolean operations with polygons: union, intersection, xor, difference. There are no assumptions about how the polygon should be formed: complex polygons with holes or self-intersecting polygons will do. It differs from similar libraries in that it only uses integer coordinates in the API as well as internally. Algorithm used here is the classic Bentley-Ottmann modified to work with integer coordinates. 
 
 #### Performance
-Compared with similar Rust library [rust-geo-booleanop](https://github.com/21re/rust-geo-booleanop), this one comes out slow. In benchmarks using from 10 up to 10000 edges, Snipper proved increasingly slower by factor of 4 to 10. The troubling part is that it means asymptotic complexity of the implementation is not quite right. This is probably to great extend due to the fact that BTreeMap is used internally to implement scope. As scope is recreated at each stop, this adds some complexity over the inherent complexity of Bentley-Ottmann algorithm. Some future version may address this problem.
+Compared to a similar Rust library [rust-geo-booleanop](https://github.com/21re/rust-geo-booleanop), this one comes out slow. In benchmarks intersecting from 10 up to 10000 edges, Snipper proved increasingly slower by a factor of 4 to 10. This means asymptotic complexity of the implementation is not quite right. Most probably this is to a great extent due to the fact that BTreeMap is used internally to implement scope. As scope is recreated at each stop, this adds some complexity over the inherent complexity of Bentley-Ottmann algorithm. Some future version may address this problem.
 
 #### Purpose
 The library evolved from what was originally an educational project and its performance at the current stage is not on par with existing professional libraries. Nevertheless I consider it to be an interesting catalogue of Rust specific solutions and techniques that may be inspirational for some users.
@@ -36,11 +36,11 @@ let polygon = unsafe { Polygon::trivial(path) };
 let polygon = unsafe { Polygon::flat(vec![path0, path1]) };
 ```
 
-A safe way to create polygon is to normalize a vector of paths. This method returns a Solution object that may be used to simply retrieve a vector of paths or to build a correct polygon:
+A safe way to create polygon is to normalize a vector of paths. This method returns a Solution object that may be used to simply retrieve a vector of paths or to build a well-formed polygon:
 
 ```
 let solution = Snipper::normalize(vec![path0, path1, path2]).unwrap();
-let pahts = solution.paths();
+let paths = solution.paths(); // or let polygon = solution.polygon().unwrap();
 ```
 
 Once polygons are created, the usage is quite straightforward: 
@@ -50,7 +50,7 @@ let solution = Snipper::xor(poly0, poly1).unwrap();
 let polygon = solution.polygon().unwrap();
 ```
 
-Again the result of the operation here is Result<Solution, Error>. Client code may pull just a vector of paths out of the solution, or have a new polygon built, which takes some time penalty (significant with very complex polygons) but makes it possible to use polygon convenience methods:
+Again the result of the operation here is Result<Solution, Error>. Client code may just pull a vector of paths out of the solution or have a new polygon built, which comes with some time penalty (significant with very complex polygons) but makes it possible to use polygon convenience methods:
 
 ```
 let bounds = polygon.bounds().unwrap();
