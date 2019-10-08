@@ -40,6 +40,23 @@ A safe way to create polygon is to normalize a vector of paths. This method retu
 
 ```
 let solution = Snipper::normalize(vec![path0, path1, path2]).unwrap();
+let pahts = solution.paths();
+```
+
+Once polygons are created, the usage is quite straightforward: 
+
+```
+let solution = Snipper::xor(poly0, poly1).unwrap();
 let polygon = solution.polygon().unwrap();
 ```
+
+Again the result of the operation here is Result<Solution, Error>. Client code may pull just a vector of paths out of the solution, or have a new polygon built, which takes some time penalty (significant with big polygons) but makes it possible to use polygon convenience methods:
+
+```
+let bounds = polygon.bounds().unwrap();
+let area = polygon.area();
+let centroid = polygon.centroid();
+```
+
+
 
