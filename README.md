@@ -58,8 +58,6 @@ let area = polygon.area();
 let centroid = polygon.centroid();
 let position = polygon.position(&point);
 ```
-
-For `bounds` and `position` methods to be visible, Shape trait must be in scope.
  
 #### License
 This project is licensed under the terms of the MIT license.
